@@ -26,5 +26,3 @@ services:
       - ../packages/db-utils/dist:/root/packages/db-utils/dist
       - ../packages/http-utils/dist:/root/packages/http-utils/dist
       - ../packages/logger/dist:/root/packages/logger/dist
-    stdin_open: true
-    tty: true

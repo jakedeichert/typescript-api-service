@@ -12,9 +12,9 @@ This service uses `mask` as a task runner, instead of npm scripts. Listed below 
 
 > All commands assume that you've already ran `mask bootstrap` in the root of this repo which prepares all packages for use. If you're running this service outside of docker, you need to run `mask start -cb` in the root as well.
 
-**`mask dev`**: This will spin up the docker database container and then start the service in development mode with file watching enabled for auto rebuilds.
+**`mask dev`**: This starts the service in development mode with file watching enabled for auto rebuilds.
 
-**`mask start`**: If you're not actively developing this service and just want it to run, this is the command to do so. This will spin up the docker database container and then start the service.
+**`mask start`**: If you're not actively developing this service and just want it to run, this is the command to do so.
 
 **`mask test`**: This runs the `jest` test suites. Run `mask test -w` to start `jest` in watch mode.
 
