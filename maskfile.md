@@ -19,6 +19,68 @@ $MASK build
 
 
 
+## start
+> Start the docker stack
+
+**OPTIONS**
+* core
+    * flags: -c --core
+    * desc: Only run the core background services
+* background
+    * flags: -b --background
+    * desc: Do not stream the logs in the foreground
+
+~~~bash
+set -e # Exit on error
+
+composefile=""
+if [[ "$core" == "true" ]]; then
+    composefile="-f docker-compose.core.yml"
+fi
+
+visibility=""
+if [[ "$background" == "true" ]]; then
+    visibility="-d"
+fi
+
+cd docker && docker-compose $composefile up $visibility --build
+
+if [[ "$background" == "true" ]]; then
+    # Sleep until the database is ready
+    until docker exec api_db psql $DB_NAME &>/dev/null; do
+        echo "Waiting for the database to be ready..."
+        sleep 1s
+    done
+fi
+~~~
+
+
+
+
+
+## stop
+> Stop the docker stack
+
+~~~bash
+set -e # Exit on error
+cd docker && docker-compose stop
+~~~
+
+
+
+
+
+## logs (container)
+> Stream the logs for a docker container
+
+~~~bash
+docker logs -f $container
+~~~
+
+
+
+
+
 ## install
 > Install all dependencies
 

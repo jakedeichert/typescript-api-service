@@ -1,0 +1,30 @@
+version: '3'
+services:
+  api_db:
+    container_name: api_db
+    build: ./db
+    image: api_db
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+    ports:
+      - '5432:5432'
+
+  api_service:
+    container_name: api_service
+    build:
+      context: ../
+      dockerfile: docker/api/Dockerfile
+    ports:
+      - '7000:8080'
+    volumes:
+      - ../api/config:/root/service/config
+      - ../api/migrations:/root/service/migrations
+      - ../api/src:/root/service/src
+      - ../api/typings:/root/service/typings
+      - ../packages/config-utils/dist:/root/packages/config-utils/dist
+      - ../packages/db-utils/dist:/root/packages/db-utils/dist
+      - ../packages/http-utils/dist:/root/packages/http-utils/dist
+      - ../packages/logger/dist:/root/packages/logger/dist
+    stdin_open: true
+    tty: true

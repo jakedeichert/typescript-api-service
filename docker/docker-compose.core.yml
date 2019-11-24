@@ -1,11 +1,11 @@
 version: '3'
 services:
   api_db:
+    container_name: api_db
     build: ./db
     image: api_db
-    container_name: api_db
     environment:
-      POSTGRES_USER: '${DB_USER}'
-      POSTGRES_PASSWORD: '${DB_PASS}'
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
     ports:
       - '5432:5432'

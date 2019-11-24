@@ -26,15 +26,19 @@ This is used to spin up a database and other background services.
 
 ## Getting started
 
-Give the root [`maskfile.md`](./maskfile.md) a read to get familiar with some of the monorepo's top level commands. The api service also has its own [`maskfile.md`](./api/maskfile.md) which contains commands specific to itself.
+Read the root [`maskfile.md`](./maskfile.md) to get familiar with some of the monorepo's top level commands. The api service also has its own [`maskfile.md`](./api/maskfile.md) which contains commands specific to itself.
 
 ### Preparation
 
-Run `mask bootstrap`. This will install and build all packages and services so that they are ready for use.
+Run `mask bootstrap`. This will install and build all packages and services so that they are ready for use. If you're working on a package, you should run `mask build -w` so it auto rebuilds on file change.
 
-### Running the api service
+### Running the services
 
-To start the api service, `cd` into `./api` and run `mask start`. See the [`README.md`](./api/README.md) for more details.
+You can either run the entire stack with docker or just the database container with individual services locally.
+
+To start the entire stack, simply run `mask start`.
+
+If you want to run the api service locally instead, start the database with `mask start -cb` first and then `cd ./api && mask dev`. See the [`README.md`](./api/README.md) for more details.
 
 
 

@@ -7,16 +7,27 @@
 ## dev
 > Run the service and rebuild on file change
 
+**OPTIONS**
+* docker
+    * flags: -d --docker
+    * desc: Use the docker config instead
+
 ~~~bash
 set -e # Exit on error
-$MASK services start
 $MASK clean
+
+# Which env config file to use
+configfile="dev"
+if [[ "$docker" == "true" ]]; then
+    configfile="docker"
+fi
+
 export PATH="../node_modules/.bin:$PATH" # Add node modules to path
 concurrently -p "[{name}]" \
     -n "TypeScript,Node,Config" -c "cyan.bold,green.bold,magenta.bold" \
     "tsc --watch --preserveWatchOutput" \
     "watchexec -w dist -w ../packages -w . --exts js,env -r '$MASK start -s'" \
-    "watchexec -w config 'echo \"Updating config...\" && $MASK config dev'"
+    "watchexec -w config 'echo \"Updating config...\" && $MASK config $configfile'"
 ~~~
 
 
@@ -29,13 +40,12 @@ concurrently -p "[{name}]" \
 **OPTIONS**
 * only_start
     * flags: -s --only-start
-    * desc: Skip building and starting the docker services
+    * desc: Skip building
 
 ~~~bash
 set -e # Exit on error
 if [[ "$only_start" != "true" ]]; then
     $MASK config dev
-    $MASK services start
     $MASK build
 fi
 set -a && source .env # Inject env vars
@@ -54,26 +64,6 @@ export PATH="../node_modules/.bin:$PATH" # Add node modules to path
 $MASK clean
 export NODE_ENV=production
 tsc
-~~~
-
-
-
-
-
-## services
-
-### services start
-> Start all background docker dependencies
-
-~~~bash
-set -e # Exit on error
-set -a && source .env # Inject env vars
-cd docker && docker-compose up -d --build
-# Sleep until the database is ready
-until docker exec api_db psql $DB_NAME &>/dev/null; do
-    echo "Waiting for the database to be ready..."
-    sleep 1s
-done
 ~~~
 
 
@@ -143,7 +133,7 @@ fi
 set -e # Exit on error
 cp "config/env.$app_env" .env
 # Also append the gitignored local overrides config...
-touch config/env.overrides
+[ ! -f config/env.overrides ] && touch config/env.overrides
 echo "#######################################################################" >> .env
 echo "# LOCAL OVERRIDES" >> .env
 echo "#######################################################################" >> .env

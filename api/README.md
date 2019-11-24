@@ -10,7 +10,7 @@ This is a basic typescript api service with an example health controller include
 
 This service uses `mask` as a task runner, instead of npm scripts. Listed below are some of the common commands you'll run.
 
-> All commands assume that you've already ran `mask bootstrap` in the root of this repo which prepares all packages for use.
+> All commands assume that you've already ran `mask bootstrap` in the root of this repo which prepares all packages for use. If you're running this service outside of docker, you need to run `mask start -cb` in the root as well.
 
 **`mask dev`**: This will spin up the docker database container and then start the service in development mode with file watching enabled for auto rebuilds.
 

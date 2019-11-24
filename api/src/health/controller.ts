@@ -8,8 +8,8 @@ async function simpleHealthCheck(): HttpResponse {
 }
 
 async function extensiveHealthCheck(ctx: Context): HttpResponse {
+    ctx.logger.info('Doing extensive health check...');
     const dbHealth = await healthService.checkDb(ctx);
-
     return response().json({
         db: dbHealth,
     });
