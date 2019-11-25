@@ -50,6 +50,10 @@ If you want to run the api service locally instead, start the database with `mas
 
 This is a basic typescript api service example. Check out its [`README.md`](./api-service/README.md) for an overview of the structure and how it works.
 
+**/docker**
+
+This directory contains the `docker-compose` setup which boots up a postgres database and api service containers. The container names are currently prefixed with `project_` but you should do a global replacement to change that prefix to whatever your project's name is.
+
 **/packages**
 
 This directory contains common modules shared between services. When running `mask install` in the repo root, these directories are hoisted into `node_modules/@/<package-name>` where they become available to all services due to node's module resolution algorithm. These modules never need to be published since projects in this monorepo can just reference them via the `@` namespace.

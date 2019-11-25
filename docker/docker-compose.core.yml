@@ -1,9 +1,9 @@
 version: '3'
 services:
-  api_db:
-    container_name: api_db
+  project_db:
+    container_name: project_db
     build: ./db
-    image: api_db
+    image: project_db
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root

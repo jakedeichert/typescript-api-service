@@ -47,7 +47,7 @@ cd docker && docker-compose $composefile up $visibility --build
 
 if [[ "$background" == "true" ]]; then
     # Sleep until the database is ready
-    until docker exec api_db psql $DB_NAME &>/dev/null; do
+    until docker exec project_db psql $DB_NAME &>/dev/null; do
         echo "Waiting for the database to be ready..."
         sleep 1s
     done

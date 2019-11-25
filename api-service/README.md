@@ -36,10 +36,6 @@ These are environment variable config files for local development and testing. W
 
 On first run, you'll also notice a gitignored file `config/env.overrides`. This file is where you would put custom values specific to your local environment.
 
-**/docker**
-
-This directory contains the `docker-compose` setup which boots up a postgres database container.
-
 **/migrations**
 
 These are `knex` migrations that run during the service's bootup phase before accepting http connections. If a migration fails to run, the service will exit with an error.
