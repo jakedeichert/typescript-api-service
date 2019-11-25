@@ -11,9 +11,9 @@
     "clean": "rm -rf dist/*"
   },
   "dependencies": {
-    "@hapi/joi": "16.0.0"
+    "@hapi/joi": "^16.0.0"
   },
   "devDependencies": {
-    "@types/hapi__joi": "16.0.0"
+    "@types/hapi__joi": "^16.0.0"
   }
 }
