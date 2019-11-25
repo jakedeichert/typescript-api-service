@@ -41,9 +41,9 @@ RUN npm ci \
 # SERVICE SETUP
 #########################################################################
 WORKDIR /root/service
-COPY api/package.json api/package-lock.json ./
+COPY api-service/package.json api-service/package-lock.json ./
 RUN npm ci
-COPY api/tsconfig.json api/maskfile.md ./
+COPY api-service/tsconfig.json api-service/maskfile.md ./
 
 # Start the service
 CMD ["mask", "dev", "-d"]

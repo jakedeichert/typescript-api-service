@@ -18,10 +18,10 @@ services:
     ports:
       - '7000:8080'
     volumes:
-      - ../api/config:/root/service/config
-      - ../api/migrations:/root/service/migrations
-      - ../api/src:/root/service/src
-      - ../api/typings:/root/service/typings
+      - ../api-service/config:/root/service/config
+      - ../api-service/migrations:/root/service/migrations
+      - ../api-service/src:/root/service/src
+      - ../api-service/typings:/root/service/typings
       - ../packages/config-utils/dist:/root/packages/config-utils/dist
       - ../packages/db-utils/dist:/root/packages/db-utils/dist
       - ../packages/http-utils/dist:/root/packages/http-utils/dist

@@ -116,7 +116,7 @@ do_install() {
 
 # Install all project dependencies.
 do_install tools
-do_install api
+do_install api-service
 cd "$MASKFILE_DIR"
 for package_dir in packages/*; do
     if [[ -d "$package_dir" ]]; then
