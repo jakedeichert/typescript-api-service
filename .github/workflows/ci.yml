@@ -3,15 +3,16 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-  # test:
-  #   name: Test
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@master
-  #     - name: Fetch dependencies
-  #       run: npm install
-  #     - name: Run tests
-  #       run: npm run test
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@master
+      - name: Prepare monorepo packages
+        run: ./.github/scripts/prepare-monorepo.sh
+      - name: Run tests
+        run: mask start --core --background && cd ./api-service && mask test
 
   lint:
     name: Lint
