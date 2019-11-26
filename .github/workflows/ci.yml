@@ -12,31 +12,25 @@ jobs:
   #       run: npm install
   #     - name: Run tests
   #       run: npm run test
+
   lint:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - name: Setup monorepo packages
-        run: |
-          # Install mask
-          curl -OL https://github.com/jakedeichert/mask/releases/download/v0.7.1-final/mask-v0.7.1-final-x86_64-unknown-linux-gnu.zip \
-            && unzip mask*.zip \
-            && mv mask-*/mask /usr/share/rust/.cargo/bin
-
-          which mask
-          # Install all packages
-          mask bootstrap
-
-          ls node_modules/@
+      - name: Checkout branch
+        uses: actions/checkout@master
+      - name: Prepare monorepo packages
+        run: ./.github/scripts/prepare-monorepo.sh
       - name: Check linting
         run: cd ./api-service && mask lint
-  # format:
-  #   name: Format
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@master
-  #     - name: Fetch dependencies
-  #       run: npm install
-  #     - name: Check formatting
-  #       run: npm run format:check
+
+  format:
+    name: Format
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@master
+      - name: Prepare monorepo packages
+        run: ./.github/scripts/prepare-monorepo.sh
+      - name: Check formatting
+        run: cd ./api-service && mask format --check
