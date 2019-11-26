@@ -19,22 +19,20 @@ jobs:
       - uses: actions/checkout@master
       - name: Setup monorepo packages
         run: |
-          which unzip
-          which docker
-          which docker-compose
+          echo "$PATH"
 
           # Install mask
           curl -OL https://github.com/jakedeichert/mask/releases/download/v0.7.1-final/mask-v0.7.1-final-x86_64-unknown-linux-gnu.zip \
             && unzip mask*.zip \
-            && mv mask-*/mask /usr/bin
+            && mv mask-*/mask ./mask
 
           which mask
           # Install all packages
-          mask bootstrap
+          ./mask bootstrap
 
           ls node_modules/@
       - name: Check linting
-        run: cd ./api-service && mask lint
+        run: cd ./api-service && ./mask lint
   # format:
   #   name: Format
   #   runs-on: ubuntu-latest
