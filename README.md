@@ -1,5 +1,7 @@
 # TypeScript Services Monorepo
 
+[![build status][ci_badge]][github_ci]
+
 This is a monorepo structure I've developed for working with typescript services. An example api service is included, along with some helper packages and middleware.
 
 
@@ -79,3 +81,15 @@ In the past, I've found `lerna` to be bloated, slow, error-prone and overly comp
 ### Why `mask` instead of `make`?
 
 You can read a bit about my inspiration for creating `mask` [here](https://github.com/jakedeichert/mask#where-did-the-inspiration-come-from). I've started using `mask` as a task runner in all my projects as well as a global utility cli for various commands and scripts I run.
+
+
+
+
+
+
+
+
+
+
+[github_ci]: https://github.com/jakedeichert/typescript-api-service/actions?query=workflow%3ACI
+[ci_badge]: https://github.com/jakedeichert/typescript-api-service/workflows/CI/badge.svg?branch=master
