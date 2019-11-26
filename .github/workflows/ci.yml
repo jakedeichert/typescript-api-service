@@ -31,6 +31,8 @@ jobs:
           which mask
           # Install all packages
           mask bootstrap
+
+          ls node_modules/@
       - name: Check linting
         run: cd ./api-service && mask lint
   # format:
