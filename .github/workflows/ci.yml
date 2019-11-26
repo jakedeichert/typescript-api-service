@@ -20,6 +20,15 @@ jobs:
       - name: Setup monorepo packages
         run: |
           echo "$PATH"
+          ls -al .
+          ls -al /usr/share/rust/.cargo/bin
+          ls -al /usr/local/sbin
+          ls -al /usr/local/bin
+          ls -al /usr/sbin
+          ls -al /usr/bin
+          ls -al /sbin
+          ls -al /bin
+          ls -al /snap/bin
 
           # Install mask
           curl -OL https://github.com/jakedeichert/mask/releases/download/v0.7.1-final/mask-v0.7.1-final-x86_64-unknown-linux-gnu.zip \
