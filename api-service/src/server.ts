@@ -1,5 +1,6 @@
 import { createServer, HttpServer } from '@/http-utils/dist/server';
 import * as healthController from './health/controller';
+import * as exampleController from './example/controller';
 import logger from '@/http-utils/dist/middleware/logger';
 import errorHandler from '@/http-utils/dist/middleware/error-handler';
 import bodyParser from '@/http-utils/dist/middleware/body-parser';
@@ -10,7 +11,7 @@ import { Controller } from '@/http-utils/dist/controller';
 import { MiddlewareHandler } from '@/http-utils/dist/middleware';
 
 export function getControllers(): Controller[] {
-    return [healthController];
+    return [healthController, exampleController];
 }
 
 export function getMiddleware(): Array<MiddlewareHandler | null> {

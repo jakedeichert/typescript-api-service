@@ -21,3 +21,8 @@ export interface HandlerConfig {
     querySchema?: KeyValueMap<joi.Schema>;
     bodySchema?: KeyValueMap<joi.Schema>;
 }
+
+// Return a reference to joi so the client doesn't have to install it.
+export function validator(): joi.Root {
+    return joi;
+}
