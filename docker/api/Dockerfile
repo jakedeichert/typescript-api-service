@@ -3,7 +3,7 @@ FROM node:12.13.1-stretch-slim
 RUN apt-get update && apt-get install -y unzip
 
 # Install utilities...
-RUN curl -OL https://github.com/jakedeichert/mask/releases/download/v0.7.1-final/mask-v0.7.1-final-x86_64-unknown-linux-gnu.zip \
+RUN curl -OL https://github.com/jakedeichert/mask/releases/download/v0.7.1/mask-v0.7.1-x86_64-unknown-linux-gnu.zip \
     && unzip mask*.zip \
     && mv mask-*/mask /usr/bin
 
