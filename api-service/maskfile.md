@@ -180,11 +180,12 @@ exports.down = knex => {
 
 ~~~bash
 export PATH="../node_modules/.bin:$PATH" # Add node modules to path
-filter="{config,docker,lib,migrations,scripts,src,test,typings,.}/**/*.{js,jsx,ts,tsx,css,html,json,yml}"
+filter="**/*.{js,jsx,ts,tsx,css,html,json,yml}"
+
 if [[ $check == "true" ]]; then
-    prettier $filter --list-different
+    prettier "$filter" --ignore-path ../.gitignore --list-different
 else
-    prettier $filter --write
+    prettier "$filter" --ignore-path ../.gitignore --write
 fi
 ~~~
 
