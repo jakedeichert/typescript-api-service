@@ -63,3 +63,30 @@ Take a look at the [health controller test](./src/health/test/controller.test.ts
 **/typings**
 
 This contains useful global types and type overrides for third party packages.
+
+
+
+
+
+
+## Concepts
+
+### Database Migrations
+
+This service comes with a database migration setup powered by `knex`. When deploying a new version of this service, migrations run automatically before the service starts. If a migration happens to fail, the service will not start. This works really well with rolling deployment solutions like kubernetes where you would still have a healthy pod running and accepting traffic.
+
+## Integration Test Setup
+
+I’ve put a lot of thought into the test setup to make it as simple, fast and reliable as possible. For each test suite, a new test server is started on a random available port. A database transaction is created per test case and rolled back so that no queries affect other tests. Using `jest` as the test runner, test suites run extremely fast and in parallel. Jest’s watch mode makes writing new test suites or debugging broken test cases an absolute joy!
+
+## Config Validation
+
+Config loading is supported via .env files. Local, local docker and test config files all exist and load depending on which way you’re running the service. One of the most valuable things about this setup is that config is loaded and validated during service bootup and exits if any variable is missing or failed to pass validations such as type checking (e.g. a port number must be an actual number). This is especially helpful when adding new variables. If you forget to add the new variable to the production config, the service will fail fast and you'll find out immediately instead of finding out during runtime. This again pairs very nicely with kubernetes’ rolling deployments which won’t redirect traffic to a new service until it’s healthy.
+
+## Request Body & Query Param Validation
+
+All incoming request json bodies and query params are validated automatically to ensure they conform to your expected type definitions. If any property is the wrong type, the middleware automatically responds with a 400 Bad Request error. This allows controller logic to be much more terse because we can assume all fields are the type that we expect them to be.
+
+## Request-based Transactions
+
+Over the years, I’ve been exposed to a few different ways to manage transactions. I’ve also seen databases become completely deadlocked due to a missing transaction reference somewhere in the code. This can be equivalent to finding a needle in a haystack. But in the last API service I shipped, I implemented a way to make them dead simple and nearly impossible to mess up! Inside of every request you can reference a lazily-initialized transaction anywhere in your chain of code. Right before the response is returned, the transaction is automatically either committed or rolled back depending on whether an error was thrown. You also have the ability to manually override this or create sub-transactions if need be.
