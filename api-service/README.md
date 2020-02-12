@@ -89,4 +89,4 @@ All incoming request json bodies and query params are validated automatically to
 
 ### Request-based Transactions
 
-Over the years, I’ve been exposed to a few different ways to manage transactions. I’ve also seen databases become completely deadlocked due to a missing transaction reference somewhere in the code. This can be equivalent to finding a needle in a haystack. But in the last API service I shipped, I implemented a way to make them dead simple and nearly impossible to mess up! Inside of every request you can reference a lazily-initialized transaction anywhere in your chain of code. Right before the response is returned, the transaction is automatically either committed or rolled back depending on whether an error was thrown. You also have the ability to manually override this or create sub-transactions if need be.
+Inside of every request you can reference a lazily-initialized transaction anywhere in your chain of code. Right before the response is returned, the transaction is automatically either committed or rolled back depending on whether an error was thrown. You also have the ability to manually override this or create sub-transactions if need be.
