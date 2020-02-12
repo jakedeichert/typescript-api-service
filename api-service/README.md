@@ -89,4 +89,4 @@ All incoming request json bodies and query params are validated automatically to
 
 ### Request-based Transactions
 
-Inside of every request you can reference a lazily-initialized transaction anywhere in your chain of code. Right before the response is returned, the transaction is automatically either committed or rolled back depending on whether an error was thrown. You also have the ability to manually override this or create sub-transactions if need be.
+Inside of every request you can reference a lazily-initialized database transaction anywhere in your chain of code. Right before the response is returned, the transaction is automatically either committed or rolled back depending on whether an error was thrown. You also have the ability to manually override this or create sub-transactions if need be.
