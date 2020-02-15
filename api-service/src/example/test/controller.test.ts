@@ -85,6 +85,22 @@ describe('example controller', () => {
             });
             expect(resp.status).toBe(400);
         });
+
+        test(`errors when it can't parse the json request body`, async () => {
+            const badlyFormattedJson = `{
+                "trailing": "comma",
+            }`;
+            const resp = await testServer.api
+                .post('/example/bodySchema')
+                .set('Content-Type', 'application/json')
+                .send(badlyFormattedJson);
+            expect(resp.body).toStrictEqual({
+                err: true,
+                msg:
+                    'Failed to parse json body: Unexpected token } in JSON at position 51',
+            });
+            expect(resp.status).toBe(400);
+        });
     });
 
     describe('POST /example/querySchema', () => {
