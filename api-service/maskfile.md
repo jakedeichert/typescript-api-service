@@ -78,15 +78,15 @@ tsc
 ~~~bash
 set -e # Exit on error
 # Pulls the npm package's version field (v1.2.3)
-version=v$(shell npm run env | grep "npm_package_version" | cut -d "=" -f2)
+version=v$(npm run env | grep "npm_package_version" | cut -d "=" -f2)
 img_name=api-service
-latest_tag=$(img_name):latest
-version_tag=$(img_name):$(version)
-ecr_url=xxxxxxxxxxxxxx.dkr.ecr.us-east-1.amazonaws.com/$(version_tag)
+latest_tag=$img_name:latest
+version_tag=$img_name:$version
+ecr_url=xxxxxxxxxxxxxx.dkr.ecr.us-east-1.amazonaws.com/$version_tag
 
 docker build \
-    -t $(latest_tag) \
-    -t $(version_tag) \
+    -t $latest_tag \
+    -t $version_tag \
     -f ./Dockerfile .
 
 # Tag and push to ECR
