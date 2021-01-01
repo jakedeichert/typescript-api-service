@@ -11,10 +11,10 @@
     "clean": "rm -rf dist/*"
   },
   "dependencies": {
-    "knex": "^0.20.1",
-    "pg": "^7.12.1"
+    "knex": "^0.21.15",
+    "pg": "^8.5.1"
   },
   "devDependencies": {
-    "@types/pg": "^7.11.2"
+    "@types/pg": "^7.14.7"
   }
 }
