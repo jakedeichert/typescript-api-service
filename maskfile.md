@@ -49,7 +49,7 @@ if [[ "$background" == "true" ]]; then
     # Sleep until the database is ready
     until docker exec project_db psql $DB_NAME &>/dev/null; do
         echo "Waiting for the database to be ready..."
-        sleep 1s
+        sleep 5s
     done
 fi
 ~~~
